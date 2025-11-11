@@ -1,4 +1,4 @@
-How i started the Django project.
+## How i started the Django project.
 1. installed python3
 2. install pipevn file using the command   `pip install pipenv`.
 3. install django app using `pipenv install django` : Here, pipenv creates a directory and install the necessary dependencies. 
@@ -6,3 +6,61 @@ How i started the Django project.
 5. running `django-admin` will start a new project. It will also display all the commands you need to work with django.
 The command `django-admin start project storefront .` opens a create a new directory called storefront in our current folder.
 6. `python manage.py runserver` executes the application on a default server: 8000. You can explicitly state the port by mentioning it at the end of the command. 'pytho manage.py runserver 5000`
+
+
+## Using integrated terminal
+1. find the path to virtual environment `pipevn --venv`. copy the path.
+2. click ctrl + p, search interpreter path, then paste the code there. ...and append '/bin/python' at the end
+
+## Creating django app
+1. Use the command `python manage.py startapp playground`. This opens a new app in our directory. 
+2. You can access the intstalled apps in the settings file of the django app. There you can add or subtract whatever files you added or deleted. Content of the new app (playground include files such as):
+    - migrations folder: for generating database tables
+    - admin.py: to define how the admin interface for the app will look like
+    - apps.py:- where we configure the app ( Just like config in nodeJS).
+    - models.py:= to describe models for the app. To pull up information from the database and presents to the user. 
+    - test.py:- where we write our unit test
+    - views.py:- like a request handler
+
+3. register your new app in the list of "INSTALLED APPS" in the setting.py file.
+
+## Writing Views.
+A view function takes a request and returns a response: ie, a request handler. A simple view looks like this: 
+    ```from django.shortcuts import render
+    from django.http import HttpResponse
+
+    def say_hello(request):
+        return HttpResponse('Hello world')
+    ```
+    The code above imports the HttpResponse module to enable  communication over the internet, then use the instance of the HttpResponse to send "Hello world" message.
+
+## Mapping urls to view
+1. Create a new file in playground app called url.py: This file will contain our url informations
+2. Write a URLConf code to do the following: (every app has it's own url configuration)
+    - import django.urls from path
+    - import views from the current directory
+    - create a list of urlpatterns: urlpatterns contains a list of our path. the path is a fuction consisting of a route(string) and view(function that returns a url pattern object).
+    ```from django.urls import path
+    from . import views
+
+    urlpatterns = [
+        path('playground/home/', view.say_hello)
+    ]
+    ```
+3. Export the URLConf into the main url configuration for this project. Do the following:
+    - Go to urls.py in the main django project (storefront), and import include from django.url
+    - Next, your newly created url to the list of urlpatterns
+    ```from django.urls import include
+    
+    urlpatterns = [
+        path('playground/', include('playground.urls'))
+    ]
+    ```
+    By so doing, django knows that every request made to the playground should be handled by the above route. 
+    - test the api by visiting the appropriate endpoint on your browser. 
+
+## Using Templates 
+1. create a new folder in the root project directory called template. 
+2. In it, create a html file. write some content in it. 
+3. Configure your URLConf in views to handle a reqest to print out the content of your template. 
+    ```
