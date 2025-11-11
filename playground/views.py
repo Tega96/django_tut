@@ -4,3 +4,4 @@ from django.http import HttpResponse
 # Handler to print hello world
 def say_hello(request):
     return HttpResponse('Hello world')
+    # render(request, "index.html")

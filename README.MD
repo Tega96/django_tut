@@ -51,7 +51,7 @@ A view function takes a request and returns a response: ie, a request handler. A
     - Go to urls.py in the main django project (storefront), and import include from django.url
     - Next, your newly created url to the list of urlpatterns
     ```from django.urls import include
-    
+
     urlpatterns = [
         path('playground/', include('playground.urls'))
     ]
@@ -63,4 +63,25 @@ A view function takes a request and returns a response: ie, a request handler. A
 1. create a new folder in the root project directory called template. 
 2. In it, create a html file. write some content in it. 
 3. Configure your URLConf in views to handle a reqest to print out the content of your template. 
-    ```
+    
+## Debuging Django app
+1. install Django debug tool bar: visit this page ![Django Debug Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/installation.html)
+    - Use this command `python -m pip install django-debug-toolbar` it install
+    - Add it to the list of installed apps in the settings.py
+    - add the url: import debug_toolbar_url from debug_toolbar.toolbar and add it to urlpatterns of the project's urls.py
+    - add the middleware in the setting: Middleware are used to hook into the django's request-responce processing.
+    - copy and paste the 
+
+
+
+# Building a data model
+Data models are used to store and retrieve data
+1. Identify the entities according to the project requirements and create the relationships between them. 
+
+Each app in the django project have it's own data model.
+Each app should do one thing and do it well. 
+
+## Create new apps for the data model
+1. Use the command `python manage.py startapp store` and `python manage.py startapp tags` to create two apps: store and tags for the ecomerce app. 
+2. Add the new apps to the list of installed apps in our settings.py file.
+3. Create a Models 
