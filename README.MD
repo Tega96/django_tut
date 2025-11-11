@@ -85,3 +85,14 @@ Each app should do one thing and do it well.
 1. Use the command `python manage.py startapp store` and `python manage.py startapp tags` to create two apps: store and tags for the ecomerce app. 
 2. Add the new apps to the list of installed apps in our settings.py file.
 3. Create a Models 
+
+## Creating data models
+1. Access the newly created app: store, and go to the model.py file
+2. Create a model class (The class in Django is defined in the model's module)
+3. Within the class, defined the fields in the class, and choose the appropriate field types and their respective options eg: types = models.CharField(max_length=255)
+    ```class Product(models.Model):
+            title = models.CharField(max_length=255)
+            description = models.TextField()
+            price = models.DecimalField(max_digits=6, decimal_places=2)
+            inventory = models.IntegerField() 
+            last_update = models.DateTimeField(auto_now=True)
